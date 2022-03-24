@@ -1,7 +1,7 @@
 CREATE DATABASE orgHub_db;
 
 USE orgHub_db;
-CREATE TABLE department (
+CREATE TABLE departments (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
