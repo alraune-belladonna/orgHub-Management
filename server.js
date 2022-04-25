@@ -149,7 +149,7 @@ const showDepartments = () => {
     console.table(departments)
   })
 
-};
+}
 
 const showRoles = () => {
   db.query('Select * FROM roles', (err, roles) => {
@@ -159,7 +159,7 @@ const showRoles = () => {
     console.table(roles)
   })
 
-};
+}
 
 const showEmployees = () => {
   db.query('SELECT * FROM employees', (err, employees) => {
