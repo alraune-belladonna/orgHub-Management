@@ -16,7 +16,7 @@ const showDepartments = () => {
     }
     console.table(departments)
   })
-
+  menu()
 }
 
 const showRoles = () => {
@@ -26,7 +26,7 @@ const showRoles = () => {
     }
     console.table(roles)
   })
-
+  menu()
 }
 
 const showEmployees = () => {
@@ -36,7 +36,7 @@ const showEmployees = () => {
     }
     console.table(employees)
   })
-
+  menu()
 }
 
 const addDepartment = () => {
@@ -54,6 +54,7 @@ const addDepartment = () => {
         console.log("department added")
       })
     })
+    menu()
 }
 
 const addRole = () => {
@@ -82,6 +83,7 @@ const addRole = () => {
       console.log(`new role added`);
     });
   });
+  menu()
 };
 
 const addEmployee = () => {
@@ -145,6 +147,7 @@ const addEmployee = () => {
       }
 
     })
+  menu()
 }
 
 const updateRole = () => {
@@ -169,6 +172,7 @@ const updateRole = () => {
       })
       console.log('employee role updated.');
     })
+  menu()
 }
 
 const menu = () => {
