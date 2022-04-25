@@ -110,9 +110,33 @@ const addEmployee = () => {
               }
             })
             console.log('new employee added');
-            
+
           })
       }
 
+    })
+}
+
+const updateRole = () => {
+  inquirer.prompt([{
+    message: 'ID of employee to update?',
+    type: 'input',
+    name: 'id'
+  },
+  {
+    message: 'ID of the new role?',
+    type: 'input',
+    name: 'role_id'
+  }])
+    .then(employee => {
+      let newRole = {
+        role_id: employee.role_id
+      }
+      db.query(`UPDATE employees SET ? WHERE id = ${employee.id}`, newRole, err => {
+        if (err) {
+          console.log(err)
+        }
+      })
+      console.log('employee role updated.');
     })
 }
