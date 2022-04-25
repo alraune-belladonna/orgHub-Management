@@ -12,7 +12,7 @@ console.log('connected to orgHub_db')
 const addDepartment = () => {
   inquirer.prompt([
     {
-      name: `departmentName`,
+      name: `name`,
       message: `Name of new department?`,
       type: `input`,
     }])
@@ -25,3 +25,31 @@ const addDepartment = () => {
       })
     })
 }
+
+const addRole = () => {
+  inquirer.prompt([
+    {
+      name: `title`,
+      message: `Name of new role?`,
+      type: `input`,
+    },
+    {
+      name: 'salary',
+      message: `Salary of new role?`,
+      type: `input`,
+    },
+    {
+      name: 'department_id',
+      message: `ID of new role?`,
+      type: `input`,
+    }
+  ])
+  .then(role => {
+    db.query("INSERT INTO roles SET ?", role, err => {
+      if (err) {
+        console.log(err)
+      }
+      console.log("New role added");
+    });
+  });
+};
