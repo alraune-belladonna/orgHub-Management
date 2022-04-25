@@ -140,3 +140,33 @@ const updateRole = () => {
       console.log('employee role updated.');
     })
 }
+
+const showDepartments = () => {
+  db.query('Select * FROM departments', (err, departments) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(departments)
+  })
+
+};
+
+const showRoles = () => {
+  db.query('Select * FROM roles', (err, roles) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(roles)
+  })
+
+};
+
+const showEmployees = () => {
+  db.query('SELECT * FROM employees', (err, employees) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(employees)
+  })
+
+}
