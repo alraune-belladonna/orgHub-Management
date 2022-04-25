@@ -9,36 +9,6 @@ const db = mysql.createConnection({
 console.log('connected to orgHub_db')
 )
 
-const showDepartments = () => {
-  db.query('Select * FROM departments', (err, departments) => {
-    if (err) {
-      console.log(err)
-    }
-    console.table(departments)
-  })
-  menu()
-}
-
-const showRoles = () => {
-  db.query('Select * FROM roles', (err, roles) => {
-    if (err) {
-      console.log(err)
-    }
-    console.table(roles)
-  })
-  menu()
-}
-
-const showEmployees = () => {
-  db.query('SELECT * FROM employees', (err, employees) => {
-    if (err) {
-      console.log(err)
-    }
-    console.table(employees)
-  })
-  menu()
-}
-
 const addDepartment = () => {
   inquirer.prompt([
     {
@@ -54,7 +24,7 @@ const addDepartment = () => {
         console.log("department added")
       })
     })
-    menu()
+  menu()
 }
 
 const addRole = () => {
@@ -75,14 +45,14 @@ const addRole = () => {
       type: `input`,
     }
   ])
-  .then(role => {
-    db.query('INSERT INTO roles SET ?', role, err => {
-      if (err) {
-        console.log(err)
-      }
-      console.log(`new role added`);
+    .then(role => {
+      db.query('INSERT INTO roles SET ?', role, err => {
+        if (err) {
+          console.log(err)
+        }
+        console.log(`new role added`);
+      });
     });
-  });
   menu()
 };
 
@@ -147,6 +117,36 @@ const addEmployee = () => {
       }
 
     })
+  menu()
+}
+
+const showDepartments = () => {
+  db.query('Select * FROM departments', (err, departments) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(departments)
+  })
+  menu()
+}
+
+const showRoles = () => {
+  db.query('Select * FROM roles', (err, roles) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(roles)
+  })
+  menu()
+}
+
+const showEmployees = () => {
+  db.query('SELECT * FROM employees', (err, employees) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(employees)
+  })
   menu()
 }
 
