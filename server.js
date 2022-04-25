@@ -45,11 +45,74 @@ const addRole = () => {
     }
   ])
   .then(role => {
-    db.query("INSERT INTO roles SET ?", role, err => {
+    db.query('INSERT INTO roles SET ?', role, err => {
       if (err) {
         console.log(err)
       }
-      console.log("New role added");
+      console.log(`new role added`);
     });
   });
 };
+
+const addEmployee = () => {
+  inquirer.prompt([
+    {
+      name: `first_name`,
+      message: `First name of new employee?`,
+      type: `input`,
+    },
+    {
+      name: `last_name`,
+      message: `Last name of new employee?`,
+      type: `input`,
+    },
+    {
+      name: `role_id`,
+      message: `Role ID of new employee?`,
+      type: `input`,
+    },
+    {
+      message: `Is new employee a manager?`,
+      type: `list`,
+      choices: [`yes`, `no`],
+      name: `managerState`
+
+    }
+  ])
+    .then(employee => {
+      if (employee.managerState === 'yes') {
+        delete employee.managerState
+        db.query('INSERT INTO employees SET ?', employee, err => {
+          if (err) {
+            console.log(err)
+          }
+        })
+        console.log('new employee added');
+
+      } else if (employee.managerState === 'no') {
+        inquirer.prompt([
+          {
+            message: 'What is the id of the manager of the employee?',
+            name: 'manager_id',
+            type: 'input'
+          }
+        ])
+          .then(junior => {
+            delete employee.managerState
+
+            let newEmployee = {
+              ...employee,
+              ...junior
+            }
+            db.query('INSERT INTO employees SET ?', newEmployee, err => {
+              if (err) {
+                console.log(err)
+              }
+            })
+            console.log('new employee added');
+            
+          })
+      }
+
+    })
+}
