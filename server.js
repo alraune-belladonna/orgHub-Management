@@ -9,6 +9,36 @@ const db = mysql.createConnection({
 console.log('connected to orgHub_db')
 )
 
+const showDepartments = () => {
+  db.query('Select * FROM departments', (err, departments) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(departments)
+  })
+
+}
+
+const showRoles = () => {
+  db.query('Select * FROM roles', (err, roles) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(roles)
+  })
+
+}
+
+const showEmployees = () => {
+  db.query('SELECT * FROM employees', (err, employees) => {
+    if (err) {
+      console.log(err)
+    }
+    console.table(employees)
+  })
+
+}
+
 const addDepartment = () => {
   inquirer.prompt([
     {
@@ -74,7 +104,7 @@ const addEmployee = () => {
     {
       message: `Is new employee a manager?`,
       type: `list`,
-      choices: [`yes`, `no`],
+      options: [`yes`, `no`],
       name: `managerState`
 
     }
@@ -141,32 +171,59 @@ const updateRole = () => {
     })
 }
 
-const showDepartments = () => {
-  db.query('Select * FROM departments', (err, departments) => {
-    if (err) {
-      console.log(err)
+const menu = () => {
+  inquirer.prompt([
+    {
+      type: 'list',
+      message: 'What would you like to do?',
+      name: 'options',
+      options: [
+        'View all departments',
+        'View all roles',
+        'View all Employees',
+        'Add Employee',
+        'Add Department',
+        'Add Role',
+        'Update Role',
+        'Quit',
+      ]
     }
-    console.table(departments)
-  })
+  ])
+    .then((response) => {
+      const { options } = response;
 
-}
+      if (options === 'View departments') {
+        showDepartments();
+      }
 
-const showRoles = () => {
-  db.query('Select * FROM roles', (err, roles) => {
-    if (err) {
-      console.log(err)
-    }
-    console.table(roles)
-  })
+      if (options === 'View roles') {
+        showRoles();
+      }
 
-}
+      if (options === 'View Employees') {
+        showEmployees();
+      }
 
-const showEmployees = () => {
-  db.query('SELECT * FROM employees', (err, employees) => {
-    if (err) {
-      console.log(err)
-    }
-    console.table(employees)
-  })
+      if (options === 'Add Department') {
+        addDepartment();
+      }
 
-}
+      if (options === 'Add Role') {
+        addRole();
+      }
+
+      if (options === 'Add Employee') {
+        addEmployee();
+      }
+
+      if (options === 'Update Role') {
+        updateRole();
+      }
+
+      if (options === 'Quit') {
+        console.log('Good bye')
+      };
+    });
+};
+
+menu();
