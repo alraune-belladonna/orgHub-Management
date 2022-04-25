@@ -1,3 +1,3 @@
 orgHub-Management - Employee Manager
 
-Notes: Schema and seed sql files built, very lost on the server.js file. Will ask at a later date.
+Console program for managing employees, departments, and managers in a company. Permits adding and updating of the aformentioned categories from the terminal.
